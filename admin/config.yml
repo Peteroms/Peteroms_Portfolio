@@ -6,6 +6,21 @@ media_folder: "images/" # Where uploaded images go
 public_folder: "/images/"
 
 collections:
+  # Blog Posts
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string", default: "Peter Omondi" }
+      - { label: "Featured Image", name: "featured_image", widget: "image", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["cloud", "devops"] }
+
   # About Section
   - name: "about"
     label: "About Section"
@@ -26,7 +41,10 @@ collections:
       - { label: "Project Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Image", name: "image", widget: "image" }
-      - { label: "Project Link", name: "link", widget: "string" }
+      - { label: "Project Link", name: "link", widget: "string", required: false }
+      - { label: "GitHub Link", name: "github", widget: "string", required: false }
+      - { label: "Technologies Used", name: "technologies", widget: "list" }
+      - { label: "Full Description", name: "body", widget: "markdown" }
 
   # Contact Info
   - name: "contact"
