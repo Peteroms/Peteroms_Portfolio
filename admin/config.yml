@@ -1,40 +1,52 @@
 backend:
   name: git-gateway
-  branch: master
+  branch: main
 
-media_folder: "images/" # Where uploaded images go
-public_folder: "/images/"
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
-  # About Section
-  - name: "about"
-    label: "About Section"
-    files:
-      - file: "index.html"
-        label: "About Content"
-        name: "about"
-        fields:
-          - { label: "About Text", name: "about_text", widget: "text" }
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Body", name: "body", widget: "markdown"}
 
-  # Portfolio Items
-  - name: "portfolio"
-    label: "Portfolio Items"
-    folder: "content/portfolio"
+  - name: "projects"
+    label: "Projects"
+    folder: "content/projects"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Project Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Image", name: "image", widget: "image" }
-      - { label: "Project Link", name: "link", widget: "string" }
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "URL", name: "url", widget: "string", required: false}
+      - {label: "Image", name: "image", widget: "image", required: false}
 
-  # Contact Info
-  - name: "contact"
-    label: "Contact Section"
+  - name: "certifications"
+    label: "Certifications"
+    folder: "content/certifications"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Issuer", name: "issuer", widget: "string"}
+      - {label: "Date", name: "date", widget: "date"}
+      - {label: "Credential URL", name: "url", widget: "string", required: false}
+
+  - name: "pages"
+    label: "Pages"
     files:
-      - file: "index.html"
-        label: "Contact Info"
-        name: "contact"
+      - label: "About"
+        name: "about"
+        file: "content/about.json"
         fields:
-          - { label: "Email", name: "email", widget: "string" }
-          - { label: "Phone", name: "phone", widget: "string" }
+          - {label: "Bio", name: "bio", widget: "markdown"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "LinkedIn", name: "linkedin", widget: "string", required: false}
+          - {label: "GitHub", name: "github", widget: "string", required: false}
